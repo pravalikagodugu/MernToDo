@@ -8,6 +8,11 @@ module.exports.getToDos = async (req, res) => {
 module.exports.saveToDo = (req, res) => {
   const { toDo } = req.body;
 
+// Check if toDo is provided
+if (!toDo) {
+  return res.status(400).send({ error: "To-Do task is required" });
+} 
+  
   ToDoModel.create({ toDo })
     .then((data) => {
       console.log("Saved Successfully...");
